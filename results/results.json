@@ -1,6 +1,62 @@
-{"id": "TestAgent_Alpha", "agent_id": "TestAgent_Alpha", "challenge_id": "MSR-CVE-2017-0402-4214", "security_score": 0.95, "similarity_score": 0.88, "is_secure": 1, "functional_tests_passed": 1, "timestamp": "2026-02-01T10:00:00"}
-{"id": "TestAgent_Alpha", "agent_id": "TestAgent_Alpha", "challenge_id": "MSR-CVE-2017-0402-4214", "security_score": 0.95, "similarity_score": 0.88, "is_secure": 1, "functional_tests_passed": 1, "timestamp": "2026-02-01T10:00:05"}
-{"id": "TestAgent_Beta", "agent_id": "TestAgent_Beta", "challenge_id": "MSR-CVE-2019-1010-55", "security_score": 0.50, "similarity_score": 0.45, "is_secure": 0, "functional_tests_passed": 1, "timestamp": "2026-02-01T10:05:00"}
-{"id": "TestAgent_Beta", "agent_id": "TestAgent_Beta", "challenge_id": "MSR-CVE-2019-1010-55", "security_score": 0.50, "similarity_score": 0.45, "is_secure": 0, "functional_tests_passed": 1, "timestamp": "2026-02-01T10:05:05"}
-{"id": "Purple_Agent_Heuristic", "agent_id": "Purple_Agent_Heuristic", "challenge_id": "MSR-CVE-2025-09518", "security_score": 0.9035, "similarity_score": 0.88, "is_secure": 1, "functional_tests_passed": 1, "timestamp": "2026-02-01T10:10:00"}
-{"id": "Purple_Agent_Heuristic", "agent_id": "Purple_Agent_Heuristic", "challenge_id": "MSR-CVE-2025-09518", "security_score": 0.9035, "similarity_score": 0.88, "is_secure": 1, "functional_tests_passed": 1, "timestamp": "2026-02-01T10:10:05"}
+[
+    {
+        "id": "TestAgent_Alpha",
+        "agent_id": "TestAgent_Alpha",
+        "challenge_id": "MSR-CVE-2017-0402-4214",
+        "is_secure": 1,
+        "functional_tests_passed": 1,
+        "security_score": 0.95,
+        "similarity_score": 0.88,
+        "timestamp": "2026-02-01T10:00:00"
+    },
+    {
+        "id": "TestAgent_Alpha",
+        "agent_id": "TestAgent_Alpha",
+        "challenge_id": "MSR-CVE-2017-0402-4214",
+        "is_secure": 1,
+        "functional_tests_passed": 1,
+        "security_score": 0.95,
+        "similarity_score": 0.88,
+        "timestamp": "2026-02-01T10:00:05"
+    },
+    {
+        "id": "TestAgent_Beta",
+        "agent_id": "TestAgent_Beta",
+        "challenge_id": "MSR-CVE-2019-1010-55",
+        "is_secure": 0,
+        "functional_tests_passed": 1,
+        "security_score": 0.50,
+        "similarity_score": 0.45,
+        "timestamp": "2026-02-01T10:05:00"
+    },
+    {
+        "id": "TestAgent_Beta",
+        "agent_id": "TestAgent_Beta",
+        "challenge_id": "MSR-CVE-2019-1010-55",
+        "is_secure": 0,
+        "functional_tests_passed": 1,
+        "security_score": 0.50,
+        "similarity_score": 0.45,
+        "timestamp": "2026-02-01T10:05:05"
+    },
+    {
+        "id": "Purple_Agent_Heuristic",
+        "agent_id": "Purple_Agent_Heuristic",
+        "challenge_id": "MSR-CVE-2025-09518",
+        "is_secure": 1,
+        "functional_tests_passed": 1,
+        "security_score": 0.9035,
+        "similarity_score": 0.88,
+        "timestamp": "2026-02-01T10:10:00"
+    },
+    {
+        "id": "Purple_Agent_Heuristic",
+        "agent_id": "Purple_Agent_Heuristic",
+        "challenge_id": "MSR-CVE-2025-09518",
+        "is_secure": 1,
+        "functional_tests_passed": 1,
+        "security_score": 0.9035,
+        "similarity_score": 0.88,
+        "timestamp": "2026-02-01T10:10:05"
+    }
+]
