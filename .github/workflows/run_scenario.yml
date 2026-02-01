@@ -1,0 +1,62 @@
+name: Run Scenario
+
+on:
+  workflow_dispatch:
+    inputs:
+      submission_id:
+        description: 'Submission ID'
+        required: true
+      agent_image:
+        description: 'Purple Agent Image'
+        required: true
+  repository_dispatch:
+    types: [run-scenario]
+
+permissions:
+  contents: write
+  packages: read
+
+jobs:
+  run-assessment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Leaderboard
+        uses: actions/checkout@v4
+
+      - name: Setup Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Run Green Agent Assessment
+        env:
+          GREEN_AGENT_IMAGE: amdravidranjan/avayam-green-agent:latest
+          PURPLE_AGENT_IMAGE: ${{ github.event.client_payload.agent_image || inputs.agent_image }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          echo "Starting Assessment Runner..."
+          # In a real template, this uses the AgentBeats CLI or Docker Compose
+          # For now, we simulate the runner or pull the official runner
+          
+          # 1. Pull Green Agent
+          docker pull $GREEN_AGENT_IMAGE
+          
+          # 2. Pull Purple Agent
+          docker pull $PURPLE_AGENT_IMAGE
+          
+          # 3. Create Network
+          docker network create agentbeats_net
+          
+          # 4. Run (Simulator Check for now)
+          echo "Running assessment between $GREEN_AGENT_IMAGE and $PURPLE_AGENT_IMAGE"
+          docker run --network agentbeats_net -d --name green_agent $GREEN_AGENT_IMAGE
+          # ... Interaction logic would go here ...
+
+      - name: Save Results
+        if: always()
+        run: |
+          # This step pushes generated results back to the repo
+          # Assuming the runner generated a file in results/
+          git config --global user.name "AgentBeats Bot"
+          git config --global user.email "bot@agentbeats.dev"
+          git add results/
+          git commit -m "Add assessment results for submission" || echo "No changes to commit"
+          git push
