@@ -1,0 +1,14 @@
+[green_agent]
+image = "amdravidranjan/avayam-green-agent:latest"
+env = { OPENAI_API_KEY = "${OPENAI_API_KEY}" }
+
+[[participants]]
+agentbeats_id = ""
+name = "purple_agent"
+image = ""
+env = {}
+
+[config]
+description = "Avayam Green Agent - Vulnerability Patch Similarity Scoring"
+dataset = "MSR-2020-CVE"
+challenges = "all"
