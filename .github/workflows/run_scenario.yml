@@ -55,4 +55,5 @@ jobs:
           git config --global user.email "bot@avayam.dev"
           git add results/*.json
           git commit -m "Automated Benchmark Result $(date)" || echo "No changes to commit"
+          git pull --rebase origin main
           git push
