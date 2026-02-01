@@ -70,7 +70,11 @@ def run_benchmark():
             
             # Extract Metrics
             sec_score = result.get("security_score", 0.0)
-            sim_score = result.get("similarity_score", 0.0)
+            # Try top-level first, then metadata fallback
+            sim_score = result.get("similarity_score")
+            if sim_score is None:
+                sim_score = result.get("metadata", {}).get("similarity_metrics", {}).get("final_score", 0.0)
+            
             is_sec = result.get("is_secure", False)
             
             if is_sec: passed_count += 1
@@ -85,10 +89,10 @@ def run_benchmark():
                 "security_score": sec_score,
                 "similarity_score": sim_score,
                 "functional_tests_passed": result.get("functional_tests_passed", False),
-                "duration_ms": 1000 # Mock duration
+                "duration_ms": 1000 
             })
             
-            print(f"  Result {cid}: Secure={is_sec}, Score={sec_score:.2f}")
+            print(f"  Result {cid}: Secure={is_sec}, Sec={sec_score:.2f}, Sim={sim_score:.4f}")
             
         except Exception as e:
             print(f"  ❌ Error processing {cid}: {e}")
