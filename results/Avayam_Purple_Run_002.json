@@ -1,0 +1,27 @@
+{
+    "participants": {
+        "agent": "019c17ab-21f2-78a3-a404-24054d5c73b8"
+    },
+    "results": [
+        {
+            "metrics": {
+                "total_challenges": 1,
+                "security_score_avg": 0.95,
+                "similarity_score_avg": 0.92,
+                "functional_tests_passed": 1,
+                "challenges_attempted": 1
+            },
+            "samples": [
+                {
+                    "challenge_id": "MSR-CVE-2025-09518",
+                    "status": "success",
+                    "is_secure": true,
+                    "security_score": 0.95,
+                    "similarity_score": 0.92,
+                    "functional_tests_passed": true,
+                    "duration_ms": 4200
+                }
+            ]
+        }
+    ]
+}
