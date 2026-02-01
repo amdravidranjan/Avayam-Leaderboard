@@ -1,62 +1,58 @@
-name: Run Scenario
-
+name: Run Avayam Benchmark
 on:
-  workflow_dispatch:
-    inputs:
-      submission_id:
-        description: 'Submission ID'
-        required: true
-      agent_image:
-        description: 'Purple Agent Image'
-        required: true
-  repository_dispatch:
-    types: [run-scenario]
+  push:
+    paths:
+      - 'scenario.toml'  # Trigger when config changes
+  workflow_dispatch:      # Allow manual trigger
 
 permissions:
   contents: write
-  packages: read
 
 jobs:
-  run-assessment:
+  run-benchmark:
     runs-on: ubuntu-latest
+    
+    services:
+      # Green Agent (The Judge)
+      green-agent:
+        image: amdravidranjan/avayam-green-agent:latest
+        ports:
+          - 8000:8000
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      # Purple Agent (The Participant)
+      # Usually this would be dynamic, but for this repo it's fixed
+      participant-agent:
+        image: amdravidranjan/avayam-purple-agent:latest
+        ports:
+          - 8001:8000 
+        env:
+          # If the user sets this secret, the agent uses LLM. Otherwise fallback to Heuristic.
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
     steps:
-      - name: Checkout Leaderboard
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Docker
-        uses: docker/setup-buildx-action@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
-      - name: Run Green Agent Assessment
+      - name: Install Runner Dependencies
+        run: pip install requests
+
+      - name: Run Benchmark Script
+        run: python scripts/runner.py
         env:
-          GREEN_AGENT_IMAGE: amdravidranjan/avayam-green-agent:latest
-          PURPLE_AGENT_IMAGE: ${{ github.event.client_payload.agent_image || inputs.agent_image }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          echo "Starting Assessment Runner..."
-          # In a real template, this uses the AgentBeats CLI or Docker Compose
-          # For now, we simulate the runner or pull the official runner
-          
-          # 1. Pull Green Agent
-          docker pull $GREEN_AGENT_IMAGE
-          
-          # 2. Pull Purple Agent
-          docker pull $PURPLE_AGENT_IMAGE
-          
-          # 3. Create Network
-          docker network create agentbeats_net
-          
-          # 4. Run (Simulator Check for now)
-          echo "Running assessment between $GREEN_AGENT_IMAGE and $PURPLE_AGENT_IMAGE"
-          docker run --network agentbeats_net -d --name green_agent $GREEN_AGENT_IMAGE
-          # ... Interaction logic would go here ...
+          # Optional: Override Agent ID if needed from GitHub Vars
+          AGENT_ID: "019c17ab-21f2-78a3-a404-24054d5c73b8"
 
-      - name: Save Results
-        if: always()
+      - name: Commit Results
         run: |
-          # This step pushes generated results back to the repo
-          # Assuming the runner generated a file in results/
-          git config --global user.name "AgentBeats Bot"
-          git config --global user.email "bot@agentbeats.dev"
-          git add results/
-          git commit -m "Add assessment results for submission" || echo "No changes to commit"
+          git config --global user.name "Avayam Bot"
+          git config --global user.email "bot@avayam.dev"
+          git add results/*.json
+          git commit -m "Automated Benchmark Result $(date)" || echo "No changes to commit"
           git push
