@@ -1,0 +1,38 @@
+[
+  {
+    "timestamp": "2026-02-01T08:25:33.040913",
+    "agent_id": "TestAgent_Alpha",
+    "challenge_id": "MSR-CVE-2017-0402-4214",
+    "is_secure": 1,
+    "functional_tests_passed": 1,
+    "security_score": 0.95,
+    "similarity_score": 0.88
+  },
+  {
+    "timestamp": "2026-02-01T08:25:33.040913",
+    "agent_id": "TestAgent_Alpha",
+    "challenge_id": "MSR-CVE-2017-0402-4214",
+    "is_secure": 1,
+    "functional_tests_passed": 1,
+    "security_score": 0.95,
+    "similarity_score": 0.88
+  },
+  {
+    "timestamp": "2026-02-01T08:25:33.040913",
+    "agent_id": "TestAgent_Beta",
+    "challenge_id": "MSR-CVE-2019-1010-55",
+    "is_secure": 0,
+    "functional_tests_passed": 1,
+    "security_score": 0.5,
+    "similarity_score": 0.45
+  },
+  {
+    "timestamp": "2026-02-01T08:25:33.040913",
+    "agent_id": "TestAgent_Beta",
+    "challenge_id": "MSR-CVE-2019-1010-55",
+    "is_secure": 0,
+    "functional_tests_passed": 1,
+    "security_score": 0.5,
+    "similarity_score": 0.45
+  }
+]
