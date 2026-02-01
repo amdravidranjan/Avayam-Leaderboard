@@ -1,4 +1,5 @@
 [green_agent]
+agentbeats_id = "019c1788-1058-7db2-882b-858e36cdf29b"
 image = "amdravidranjan/avayam-green-agent:latest"
 env = { OPENAI_API_KEY = "${OPENAI_API_KEY}" }
 
